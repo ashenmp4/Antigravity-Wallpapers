@@ -9,17 +9,14 @@ A powerful, high-performance customization suite for the [Antigravity](https://a
 
 ---
 
-## 🌟 Original Creator & Community Credits
+## 🌟 Original Creator Attribution
 
-This project builds upon the amazing foundation created by the open-source community:
+This project is an extended edition based on the foundational work by the original creator:
 
 - **Original Creator**: **[erlttt0](https://github.com/erlttt0)** ([Mix4o445](https://mix4o445.github.io/antigravity-ascii-wallpapers/))
   - Created the original [antigravity-ascii-wallpapers](https://github.com/erlttt0/antigravity-ascii-wallpapers) project.
   - Authored the **50 procedural ASCII scene renderers** (Aurora, Catnap, Koi Pond, Digital Rain, etc.), the quick theme switcher, and the real-time model quota monitor chip.
   - Designed the robust, fuse-safe `app.asar` patching and integrity verification architecture.
-- **Key Contributors**:
-  - **[oocsng](https://github.com/oocsng)**: Acrylic sidebar styling, frosted glass header integration, calm titlebar zones, and responsive row actions.
-  - **[Darksoul913](https://github.com/Darksoul913)**: macOS platform compatibility and path resolution.
 
 > **Disclaimer**: This is an independent, unofficial community mod. It is not affiliated with, sponsored, or endorsed by Google. All modifications are made locally to your installed app with automated checksum backups.
 
@@ -188,4 +185,4 @@ To revert Antigravity back to its 100% factory clean state:
 This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 Original ASCII renderers & themes Copyright (c) 2026 **erlttt0** (Mix4o445).  
-Liquid Glass Customizer & Appearance Studio enhancements Copyright (c) 2026 Community Contributors.
+Liquid Glass Customizer & Appearance Studio enhancements Copyright (c) 2026 ashenmp4.
