@@ -2076,42 +2076,9 @@
     if (!studioShadow) return;
     const btn = studioShadow.querySelector('.studio-trigger');
     if (!btn) return;
-    const bridge = window.__agyAsciiBridge;
-    const asciiShadow = bridge?.getElements?.()?.shadow;
-    const themesBtn = asciiShadow?.querySelector?.('.trigger');
-    const quotaChip = asciiShadow?.querySelector?.('.quota');
-
-    // 1. Position Studio immediately to the left of Themes button
-    let studioRight = 226;
-    if (themesBtn) {
-      const r = themesBtn.getBoundingClientRect();
-      if (r.width > 0 && r.left >= (window.innerWidth - 300)) {
-        studioRight = Math.round(window.innerWidth - r.left + 6);
-        btn.style.top = Math.round(r.top) + 'px';
-      } else {
-        btn.style.top = '5px';
-      }
-    } else {
-      btn.style.top = '5px';
-    }
-    btn.style.right = Math.max(200, Math.min(270, studioRight)) + 'px';
-
-    // 2. Position Quota chip immediately to the left of Studio button so they never collide
-    if (quotaChip && !quotaChip.hidden) {
-      const br = btn.getBoundingClientRect();
-      const quotaRight = (br.width > 0 && br.left > 0)
-        ? Math.round(window.innerWidth - br.left + 8)
-        : (parseInt(btn.style.right, 10) + 80);
-      quotaChip.style.right = Math.max(305, Math.min(480, quotaRight)) + 'px';
-      quotaChip.style.top = btn.style.top || '5px';
-
-      const list = asciiShadow?.querySelector?.('.quota-list');
-      if (list && !list.hidden) {
-        const c = quotaChip.getBoundingClientRect();
-        list.style.top = Math.round(c.bottom + 6) + 'px';
-        list.style.right = Math.max(8, Math.round(window.innerWidth - c.right)) + 'px';
-      }
-    }
+    const isMac = typeof navigator !== 'undefined' && (/(Mac|iPhone|iPad|iPod)/i.test(navigator.platform || '') || /Mac/i.test(navigator.userAgent || ''));
+    btn.style.top = '5px';
+    btn.style.right = isMac ? '168px' : '218px';
   }
 
   function toggleStudio(openState) {
@@ -3129,7 +3096,7 @@
       button, input, select, textarea { font: inherit; color: inherit; }
       button { cursor: pointer; }
       .studio-trigger {
-        position: fixed; top: 5px; right: 228px; height: 25px; padding: 0 9px;
+        position: fixed; top: 5px; right: 218px; height: 25px; padding: 0 9px;
         display: flex; align-items: center; gap: 5px;
         border: 1px solid rgba(110, 231, 255, 0.28); border-radius: 5px;
         background: rgba(12, 22, 38, 0.45); backdrop-filter: blur(12px);
@@ -3137,6 +3104,7 @@
         pointer-events: auto; -webkit-app-region: no-drag;
         transition: background 0.15s, border-color 0.15s;
       }
+      :host([data-platform=darwin]) .studio-trigger { right: 168px; }
       .studio-trigger:hover, .studio-trigger[aria-expanded="true"] {
         background: rgba(110, 231, 255, 0.16); border-color: rgba(110, 231, 255, 0.65);
       }

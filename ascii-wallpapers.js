@@ -178,11 +178,12 @@
     const css=make('style');css.textContent=`
       :host{all:initial;position:fixed;top:0;left:0;width:0;height:0;z-index:2147483000;pointer-events:none;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--aw-fg,#edf0fa);--aw-panel:#0d1224;--aw-card:#1e263c;--aw-fg:#edf0fa;--aw-muted:#bdc6df;--aw-border:#465375;--aw-accent:#ddd8ad}
       *{box-sizing:border-box}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--aw-accent);outline-offset:3px}button:disabled{opacity:.45;cursor:default}[hidden]{display:none!important}
-      .trigger{position:fixed;top:5px;right:155px;pointer-events:auto;-webkit-app-region:no-drag;display:flex;align-items:center;gap:6px;height:25px;padding:0 9px;border:1px solid transparent;border-radius:5px;color:var(--aw-fg);background:transparent;font-size:11px}
-      :host([data-platform=darwin]) .trigger{right:200px}
+      .trigger{position:fixed;top:5px;right:145px;pointer-events:auto;-webkit-app-region:no-drag;display:flex;align-items:center;gap:6px;height:25px;padding:0 9px;border:1px solid transparent;border-radius:5px;color:var(--aw-fg);background:transparent;font-size:11px}
+      :host([data-platform=darwin]) .trigger{right:95px}
       .trigger:hover,.trigger[aria-expanded=true]{background:color-mix(in srgb,var(--aw-fg) 10%,transparent)}
       [data-health=ok]{--c:var(--aw-accent)}[data-health=warn]{--c:color-mix(in srgb,#f0a83a 80%,var(--aw-fg))}[data-health=low]{--c:color-mix(in srgb,#ff5f5f 85%,var(--aw-fg))}
-      .quota{position:fixed;top:5px;right:240px;pointer-events:auto;-webkit-app-region:no-drag;display:flex;align-items:center;gap:12px;height:25px;padding:0 8px;border:1px solid transparent;border-radius:5px;color:var(--aw-fg);background:transparent;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap}
+      .quota{position:fixed;top:5px;right:304px;pointer-events:auto;-webkit-app-region:no-drag;display:flex;align-items:center;gap:12px;height:25px;padding:0 8px;border:1px solid transparent;border-radius:5px;color:var(--aw-fg);background:transparent;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap}
+      :host([data-platform=darwin]) .quota{right:254px}
       .quota:hover,.quota[aria-expanded=true]{background:color-mix(in srgb,var(--aw-fg) 10%,transparent)}.quota[data-stale]{opacity:.55}
       .quota-item{display:flex;align-items:center;gap:5px}.quota-item[data-health=low]{color:var(--c)}.quota-short{color:var(--aw-muted)}
       @media(max-width:1000px){.quota-short{display:none}.quota{gap:8px}}
@@ -293,42 +294,13 @@
     if(!shadow)return;
     const trigger=shadow.querySelector('.trigger');
     if(!trigger)return;
-    const candidates=document.querySelectorAll('button, a, [role="button"], div');
-    let anchor=null;
-    for(const el of candidates){
-      if(/Open\s+IDE/i.test(el.textContent||'')&&(el.textContent||'').trim().length<30){
-        const r=el.getBoundingClientRect();
-        if(r.top>=0&&r.top<60&&r.left>=(window.innerWidth-380)&&r.width>10&&r.height>10){
-          anchor=el.closest('button, a, [role="button"]')||el;
-          break;
-        }
-      }
-    }
-    if(anchor){
-      const r=anchor.getBoundingClientRect();
-      const trigRight = Math.max(140, Math.min(320, Math.round(window.innerWidth - r.left + 8)));
-      trigger.style.right=trigRight+'px';
-      const targetTop=Math.round(r.top+(r.height-25)/2);
-      if(targetTop>=0&&targetTop<40)trigger.style.top=targetTop+'px';
-    }else{
-      trigger.style.right=isMac?'110px':'145px';
-      trigger.style.top='5px';
-    }
+    trigger.style.top='5px';
+    trigger.style.right=isMac?'95px':'145px';
+
     const chip=shadow.querySelector('.quota'),list=shadow.querySelector('.quota-list');
     if(chip&&!chip.hidden){
-      const studioHost = document.getElementById('agy-liquid-customizer');
-      const studioBtn = studioHost?.shadowRoot?.querySelector('.studio-trigger');
-      let safeChipRight;
-      if (studioBtn && !studioBtn.hidden) {
-        const sr = studioBtn.getBoundingClientRect();
-        safeChipRight = (sr.width > 0 && sr.left > 0) ? Math.round(window.innerWidth - sr.left + 8) : 310;
-      } else {
-        const r = trigger.getBoundingClientRect();
-        safeChipRight = (r.width > 0 && r.left > 0) ? Math.round(window.innerWidth - r.left + 8) : 220;
-      }
-      safeChipRight = Math.max(220, Math.min(480, safeChipRight));
-      chip.style.top=trigger.style.top||'5px';
-      chip.style.right=safeChipRight+'px';
+      chip.style.top='5px';
+      chip.style.right=isMac?'254px':'304px';
       const c=chip.getBoundingClientRect();
       list.style.top=Math.round(c.bottom+6)+'px';
       list.style.right=Math.max(8,Math.round(innerWidth-c.right))+'px';
