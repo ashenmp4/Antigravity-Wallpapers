@@ -289,8 +289,8 @@
       version: 2,
       enabled: true,
       autoSave: true,
-      activeProfileId: 'prof_mwdinmpu_76t3',
-      defaultProfileId: 'prof_mwdinmpu_76t3',
+      activeProfileId: 'dark-liquid-glass',
+      defaultProfileId: 'dark-liquid-glass',
       performanceProfile: 'high', // 'high' | 'balanced' | 'performance'
       wallpaper: {
         source: legacyPrefs?.theme === 'off' ? 'off' : 'ascii', // 'ascii' | 'static' | 'gif' | 'webp' | 'video' | 'off'
