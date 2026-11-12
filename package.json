@@ -1,0 +1,32 @@
+{
+  "name": "@ashenmp4/antigravity-wallpapers",
+  "version": "2.0.0",
+  "description": "Antigravity Ultimate Personalization Mod — Liquid Glass & Custom Wallpapers",
+  "main": "manage-wallpapers.cjs",
+  "scripts": {
+    "test": "node tests/manage-wallpapers.test.cjs",
+    "install-mod": "node manage-wallpapers.cjs install",
+    "status": "node manage-wallpapers.cjs status",
+    "restore": "node manage-wallpapers.cjs restore",
+    "verify": "node manage-wallpapers.cjs verify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashenmp4/Antigravity-Wallpapers.git"
+  },
+  "keywords": [
+    "antigravity",
+    "wallpapers",
+    "liquid-glass",
+    "customizer",
+    "appearance-studio",
+    "glassmorphism",
+    "themes"
+  ],
+  "author": "ashenmp4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ashenmp4/Antigravity-Wallpapers/issues"
+  },
+  "homepage": "https://github.com/ashenmp4/Antigravity-Wallpapers#readme"
+}
