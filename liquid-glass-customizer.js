@@ -2080,24 +2080,38 @@
     const asciiShadow = bridge?.getElements?.()?.shadow;
     const themesBtn = asciiShadow?.querySelector?.('.trigger');
     const quotaChip = asciiShadow?.querySelector?.('.quota');
-    if (quotaChip && !quotaChip.hidden) {
-      const r = quotaChip.getBoundingClientRect();
-      if (r.width > 0 && r.left >= (window.innerWidth - 420)) {
-        btn.style.top = Math.round(r.top) + 'px';
-        btn.style.right = Math.max(220, Math.min(380, Math.round(window.innerWidth - r.left + 6))) + 'px';
-        return;
-      }
-    }
+
+    // 1. Position Studio immediately to the left of Themes button
+    let studioRight = 226;
     if (themesBtn) {
       const r = themesBtn.getBoundingClientRect();
-      if (r.width > 0 && r.left >= (window.innerWidth - 350)) {
+      if (r.width > 0 && r.left >= (window.innerWidth - 300)) {
+        studioRight = Math.round(window.innerWidth - r.left + 6);
         btn.style.top = Math.round(r.top) + 'px';
-        btn.style.right = Math.max(200, Math.min(350, Math.round(window.innerWidth - r.left + 6))) + 'px';
-        return;
+      } else {
+        btn.style.top = '5px';
+      }
+    } else {
+      btn.style.top = '5px';
+    }
+    btn.style.right = Math.max(200, Math.min(270, studioRight)) + 'px';
+
+    // 2. Position Quota chip immediately to the left of Studio button so they never collide
+    if (quotaChip && !quotaChip.hidden) {
+      const br = btn.getBoundingClientRect();
+      const quotaRight = (br.width > 0 && br.left > 0)
+        ? Math.round(window.innerWidth - br.left + 8)
+        : (parseInt(btn.style.right, 10) + 80);
+      quotaChip.style.right = Math.max(305, Math.min(480, quotaRight)) + 'px';
+      quotaChip.style.top = btn.style.top || '5px';
+
+      const list = asciiShadow?.querySelector?.('.quota-list');
+      if (list && !list.hidden) {
+        const c = quotaChip.getBoundingClientRect();
+        list.style.top = Math.round(c.bottom + 6) + 'px';
+        list.style.right = Math.max(8, Math.round(window.innerWidth - c.right)) + 'px';
       }
     }
-    btn.style.top = '5px';
-    btn.style.right = '275px';
   }
 
   function toggleStudio(openState) {

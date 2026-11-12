@@ -316,10 +316,18 @@
     }
     const chip=shadow.querySelector('.quota'),list=shadow.querySelector('.quota-list');
     if(chip&&!chip.hidden){
-      const r=trigger.getBoundingClientRect();
-      const trigRight = Math.round(window.innerWidth - r.left + 4);
-      const safeChipRight = Math.max(185, Math.min(360, trigRight));
-      chip.style.top=Math.round(r.top)+'px';
+      const studioHost = document.getElementById('agy-liquid-customizer');
+      const studioBtn = studioHost?.shadowRoot?.querySelector('.studio-trigger');
+      let safeChipRight;
+      if (studioBtn && !studioBtn.hidden) {
+        const sr = studioBtn.getBoundingClientRect();
+        safeChipRight = (sr.width > 0 && sr.left > 0) ? Math.round(window.innerWidth - sr.left + 8) : 310;
+      } else {
+        const r = trigger.getBoundingClientRect();
+        safeChipRight = (r.width > 0 && r.left > 0) ? Math.round(window.innerWidth - r.left + 8) : 220;
+      }
+      safeChipRight = Math.max(220, Math.min(480, safeChipRight));
+      chip.style.top=trigger.style.top||'5px';
       chip.style.right=safeChipRight+'px';
       const c=chip.getBoundingClientRect();
       list.style.top=Math.round(c.bottom+6)+'px';
