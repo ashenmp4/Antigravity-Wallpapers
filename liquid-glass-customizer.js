@@ -1380,13 +1380,19 @@
         box-shadow: 0 6px 20px rgba(0,0,0,${(Number(shAlpha) * 0.45).toFixed(3)}), inset 0 1px 0 rgba(255,255,255,${hiAlpha}) !important;
       }
 
-      /* 4. Navigation & Header */
-      :is(body[data-aw-theme], body[data-agy-customizer]) .agy-shell > .shrink-0 {
+      /* 4. Navigation & Header - Titlebar has highest priority so menus drop on top */
+      :is(body[data-aw-theme], body[data-agy-customizer]) .agy-shell > .shrink-0:first-child {
         position: relative !important;
-        z-index: 30 !important;
+        z-index: 100 !important;
         ${compStyle('header', pal.chrome)}
         border-bottom: 0 !important;
         box-shadow: inset 0 1px 0 rgba(255,255,255,${hiAlpha}) !important;
+      }
+      :is(body[data-aw-theme], body[data-agy-customizer]) .agy-shell > .shrink-0:not(:first-child) {
+        position: relative !important;
+        z-index: 10 !important;
+        ${compStyle('header', pal.chrome)}
+        border-bottom: 0 !important;
       }
 
       /* Breadcrumbs & Navigation Titles (Fixes neon halos) */
@@ -1485,7 +1491,10 @@
         fill: #061220 !important;
       }
 
-      /* 6. Menus & Dropdowns (SOLID / OPAQUE to prevent text collision) */
+      /* 6. Menus & Dropdowns (SOLID / OPAQUE to prevent text collision, always on top) */
+      :is(body[data-aw-theme], body[data-agy-customizer]) [data-radix-popper-content-wrapper] {
+        z-index: 9999999 !important;
+      }
       :is(body[data-aw-theme], body[data-agy-customizer]) .surface-opaque,
       :is(body[data-aw-theme], body[data-agy-customizer]) .border-menu-border,
       :is(body[data-aw-theme], body[data-agy-customizer]) [role="menu"],
@@ -1504,7 +1513,7 @@
         background-image: ${specularGradient} !important;
         color: ${pal.light ? '#0f172a' : '#f1f5f9'} !important;
         text-shadow: none !important;
-        z-index: 999999 !important;
+        z-index: 9999999 !important;
         opacity: 1 !important;
       }
 
